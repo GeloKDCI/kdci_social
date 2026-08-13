@@ -33,18 +33,24 @@ p{margin:0}
 .rail{position:fixed;inset:0 0 auto;z-index:60;background:rgba(15,15,18,.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.09)}
 .rail-in{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);height:60px;display:flex;align-items:center;gap:20px}
 .rail img{width:22px;height:22px;flex:none}
-.rail .wm{font-family:var(--dsp);font-weight:600;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;white-space:nowrap;flex:none}
-.track{position:relative;flex:1;height:26px;display:flex;align-items:center;min-width:0}
-.track::before{content:"";position:absolute;left:0;right:0;height:2px;background:rgba(255,255,255,.16)}
-.fill{position:absolute;left:0;height:2px;width:0;background:var(--red)}
-.ticks{position:relative;display:flex;justify-content:space-between;width:100%}
-.tick{appearance:none;background:0;border:0;padding:9px 2px;cursor:pointer;position:relative}
-.tick i{display:block;width:2px;height:9px;background:rgba(255,255,255,.32)}
+.track{position:relative;flex:1;height:26px;display:flex;align-items:center;gap:13px;min-width:0}
+.grp-lab{appearance:none;background:0;border:0;padding:5px 2px;margin:0;cursor:pointer;
+  font-family:var(--dsp);font-weight:600;font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.52);white-space:nowrap;flex:none;
+  transition:color .18s}
+.grp-lab:hover,.grp-lab:focus-visible{color:#fff}
+.grp-lab.on{color:var(--red)}
+.tick{appearance:none;background:0;border:0;padding:9px 4px;cursor:pointer;position:relative}
+.tick:hover i{background:rgba(255,255,255,.7)}
+.grp{position:relative;display:flex;justify-content:space-between;align-items:center;min-width:0}
+.grp::before{content:"";position:absolute;left:0;right:0;height:2px;background:rgba(255,255,255,.16)}
+.tick i{display:block;width:2px;height:9px;background:rgba(255,255,255,.32);transition:background .2s,height .2s}
+.tick.done i{background:rgba(231,22,56,.6)}
 .tick[aria-current=true] i{background:var(--red);height:15px}
 .tick b{position:absolute;top:26px;left:50%;transform:translateX(-50%);font-family:var(--body);font-weight:400;font-size:11px;color:#fff;background:var(--ink2);padding:4px 8px;border-radius:5px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
 .tick:hover b,.tick:focus-visible b{opacity:1}
 .rail .ver{font-size:12px;color:rgba(255,255,255,.5);white-space:nowrap}
-@media(max-width:1080px){.rail .wm{display:none}}
+@media(max-width:880px){.grp-lab{display:none}.track{gap:16px}}
 @media(max-width:760px){.rail .ver{display:none}}
 
 /* ---------- section shell ---------- */
@@ -83,7 +89,18 @@ a.ref:hover{border-bottom-style:solid}
 .hero img.lock{width:clamp(158px,17vw,206px);display:block;margin-bottom:28px}
 .hero h1{font-size:clamp(36px,7.2vw,76px);max-width:14ch}
 .hero .sub{margin-top:18px;font-size:clamp(16.5px,2vw,23px);color:#D4D4D8;max-width:27ch}
-.meta{margin-top:38px;font-size:14px;color:#A1A1AA;line-height:1.9}
+/* jump straight to the evidence file - the standard is long and the library is
+   the half people come back for */
+.btn{display:inline-flex;align-items:center;gap:10px;margin-top:34px;
+  font-family:var(--dsp);font-weight:700;font-size:14.5px;letter-spacing:.01em;
+  background:var(--red);color:#fff;padding:14px 24px;border-radius:100px;
+  text-decoration:none;border:0;cursor:pointer;transition:background .18s,color .18s}
+.btn:hover,.btn:focus-visible{background:#fff;color:var(--ink)}
+.btn svg{width:15px;height:15px;flex:none}
+.btn .n{font-weight:400;opacity:.75}
+.btn.ghost{background:0;color:#fff;border:1.5px solid rgba(255,255,255,.34)}
+.btn.ghost:hover,.btn.ghost:focus-visible{background:#fff;color:var(--ink);border-color:#fff}
+.meta{margin-top:30px;font-size:14px;color:#A1A1AA;line-height:1.9}
 .meta b{color:#fff}
 @media(max-width:860px){.hero-img{width:100%;opacity:.28;-webkit-mask-image:none;mask-image:none}}
 
@@ -263,6 +280,7 @@ ul.plain li::before{content:"";width:7px;height:7px;border-radius:50%;background
 .chip:hover{border-color:var(--line)}
 .chip[aria-pressed=true]{background:var(--ink);color:#fff}
 .chip.st[aria-pressed=true]{background:var(--red)}
+.chip.fm[aria-pressed=true]{background:#1B6B3A;color:#fff}
 .shown{font-size:13.5px;color:var(--muted);white-space:nowrap}
 .sub-h{margin-top:40px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .sub-h h3{font-size:clamp(20px,2.6vw,26px)}
@@ -278,6 +296,12 @@ ul.plain li::before{content:"";width:7px;height:7px;border-radius:50%;background
 .id{font-family:var(--dsp);font-weight:700;font-size:11.5px;letter-spacing:.06em;background:var(--ink);color:#fff;padding:4px 9px;border-radius:5px}
 .entry.fill .id{background:var(--red)}
 .tagt{font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--red)}
+.pf{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.03em;color:var(--muted);
+  background:var(--paper2);border-radius:4px;padding:3px 8px;white-space:nowrap}
+.form{font-size:11px;font-weight:700;letter-spacing:.03em;padding:3px 9px;border-radius:100px}
+.f-video{background:#E7F6EC;color:#1B6B3A}
+.f-channel{background:var(--paper2);color:var(--muted)}
+.f-other{background:var(--amber-bg);color:var(--amber)}
 .entry h4{font-family:var(--dsp);font-weight:700;font-size:17.5px;line-height:1.25;margin:0;letter-spacing:-.01em}
 .by{font-size:14px;color:var(--muted);margin-top:-4px}
 .why{font-size:15px}
@@ -353,8 +377,7 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
 <nav class="rail" aria-label="Section timeline">
   <div class="rail-in">
     <img src="data:image/png;base64,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" alt="">
-    <span class="wm">Editing and References</span>
-    <div class="track"><div class="fill" id="fill"></div><div class="ticks" id="ticks"></div></div>
+    <div class="track" id="track"></div>
     <span class="ver">v1.0</span>
   </div>
 </nav>
@@ -377,6 +400,10 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
       <div class="strip-x"><span>0.0s</span><span>1.0s</span><span>3.0s</span><span>8.0s</span></div>
       <p class="strip-cap">Everything in this document happens inside that bar. Miss it and the rest of the edit never gets watched.</p>
     </div>
+    <a class="btn" href="#s13">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      Go to the reference library <span class="n" id="btnCount"></span>
+    </a>
     <p class="meta">
       <b>Version 1.0 - the standard and its evidence file, in one place</b><br>
       Hooks &amp; editing: Gelo &nbsp;/&nbsp; Motion &amp; animation: Alden &nbsp;/&nbsp; Reviewed bi-monthly<br>
@@ -677,14 +704,20 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
   <div class="wrap">
     <span class="eyebrow">The evidence file</span>
     <h2>Reference library</h2>
+    <p class="dek" style="color:#fff;border-left:3px solid var(--red);padding-left:16px"><strong>Against the brief:</strong> the brief asks for 20-30 specific social videos across YouTube, Shorts, Reels and TikTok, each demonstrating a hook in the first 3-8 seconds. Only 7 rows here are one specific video, 6 of those are long-form YouTube, and none are Reels or TikTok. The rest are channel-level or packaging case studies. Filter by "One video" to see the real count. Closing that gap needs somebody scrolling the feeds, which is the next job.</p>
     <p class="dek">Every rule above links down to a row in here. If a rule has no row, it is an opinion, not a standard. Sourced rows have a published breakdown behind the note. Rows marked to verify still need somebody to watch the first ten seconds and log frame 0 before we cite them anywhere client-facing.</p>
     <p class="key" id="iconKey"></p>
     <div class="counts">
       <div><span id="cTot">0</span><small>Exemplars</small></div>
       <div class="r"><span id="cDoc">0</span><small>Sourced</small></div>
       <div><span id="cVer">0</span><small>Need a viewing pass</small></div>
+      <div><span id="cVid">0</span><small>Specific videos</small></div>
       <div><span id="cDoct">0</span><small>Doctrine sources</small></div>
     </div>
+    <a class="btn ghost" href="#top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      Go to the KDCI Standard section
+    </a>
   </div>
 </section>
 
@@ -697,6 +730,10 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
           <button class="chip" data-f="all" aria-pressed="true">All</button>
           <button class="chip" data-f="hook" aria-pressed="false">Hooks</button>
           <button class="chip" data-f="motion" aria-pressed="false">Motion</button>
+        </div>
+        <div class="chips" role="group" aria-label="Filter by entry type">
+          <button class="chip fm" data-m="video" aria-pressed="false">One video</button>
+          <button class="chip fm" data-m="channel" aria-pressed="false">Channel level</button>
         </div>
         <div class="chips" role="group" aria-label="Filter by evidence status">
           <button class="chip st" data-s="doc" aria-pressed="false">Sourced</button>
@@ -810,135 +847,135 @@ document.getElementById("tags").innerHTML = TYPES.map(function(t,i){
 
 /* ---- library data ---- */
 var HOOKS=[
- {id:"H01",t:'"$1 chicken sandwich" Short',by:"Jenny Hoyos",tag:"Specific Number + mute test",st:"doc",
+ {id:"H01",pf:"Shorts",form:"video",t:'"$1 chicken sandwich" Short',by:"Jenny Hoyos",tag:"Specific Number + mute test",st:"doc",
   why:"The first words you hear are the whole promise, and the sandwich is framed against the Chick-fil-A sign, so the claim lands verbally and visually at the same instant. No text overlay needed to pass the mute test.",
   app:"Template for our tool-comparison verticals: say the number in the first spoken words and put the recognisable thing in frame beside it.",
   ev:"Sourced: vidIQ describes the first three seconds shot by shot.",
   url:"https://vidiq.com/blog/post/how-jenny-hoyos-gets-10m-views-per-youtube-short/",go:"Breakdown"},
- {id:"H02",t:"The but-then opening line",by:"Jenny Hoyos",tag:"But-Then",st:"doc",
+ {id:"H02",pf:"Shorts",form:"other",t:"The but-then opening line",by:"Jenny Hoyos",tag:"But-Then",st:"doc",
   why:"The but plants a problem inside a second; the then opens a loop the viewer cannot close by scrolling. Published verbatim, so it can be copied as a structure rather than guessed at.",
   app:"Rewrite every KDCI vertical opener until both words, or their equivalents, sit in sentence one.",
   ev:"Sourced: verbatim line in her Marketing Examined playbook.",
   url:"https://www.marketingexamined.com/blog/jenny-hoyos-short-form-video-playbook",go:"Playbook"},
- {id:"H03",t:"$25K vs $25M",by:"Johnny Harris",tag:"Three-Tier Escalation",st:"doc",
+ {id:"H03",pf:"YouTube",form:"video",t:"$25K vs $25M",by:"Johnny Harris",tag:"Three-Tier Escalation",st:"doc",
   why:"Takes a comparison format the audience already knows how to read and applies it to income, so the structure is instantly legible while the subject is not. Familiar but unexpected, in one title.",
   app:"Direct template: $0 vs $5K vs $50K AI content stack for a mid-market brand.",
   ev:"Sourced: cited by Galloway on Colin & Samir as the familiar-but-unexpected case.",
   url:"https://www.youtube.com/watch?v=NfMdvee5HoY",go:"Watch"},
- {id:"H04",t:"World's Fastest Drone vs F1 Car",by:"Red Bull",tag:"Versus / Matchup",st:"doc",
+ {id:"H04",pf:"YouTube",form:"video",t:"World's Fastest Drone vs F1 Car",by:"Red Bull",tag:"Versus / Matchup",st:"doc",
   why:"Format lifted wholesale from car drag-race channels into a niche that had never seen it. The matchup sets the stakes before a word is spoken.",
   app:"Steal the drag-race frame for tool comparisons: human editor vs AI pipeline, same brief, same clock.",
   ev:"Sourced: Galloway names Carwow as the borrowed format.",
   url:"https://www.youtube.com/watch?v=9pEqyr_uT-k",go:"Watch"},
- {id:"H05",t:"Photographing the Milky Way in 10 minutes, 1 hour, and 24 hours",by:"Ian Lauer Astro",tag:"Three-Tier Escalation",st:"doc",
+ {id:"H05",pf:"YouTube",form:"video",t:"Photographing the Milky Way in 10 minutes, 1 hour, and 24 hours",by:"Ian Lauer Astro",tag:"Three-Tier Escalation",st:"doc",
   why:"Same camera, same editor, same subject - the channel went from 2-3K views to over 1M purely on repackaging. The escalation ladder promises a visible payoff at every rung.",
   app:"The proof case for the whole standard. Use it in onboarding when someone argues for more production instead of better packaging.",
   ev:"Sourced: case study discussed at length on Colin & Samir.",
   url:"https://www.youtube.com/watch?v=Gs8iGuyocCs",go:"Watch"},
- {id:"H06",t:"Why Are 96,000,000 Black Balls on This Reservoir?",by:"Veritasium",tag:"Specific Number",st:"doc",
+ {id:"H06",pf:"YouTube",form:"video",t:"Why Are 96,000,000 Black Balls on This Reservoir?",by:"Veritasium",tag:"Specific Number",st:"doc",
   why:"An absurdly precise number attached to an absurd image. The specificity reads as real reporting rather than bait, and the absurdity does the curiosity work with no exaggeration.",
   app:"Our AI-industry figures are already strange enough. Use the exact number, never billions.",
   ev:"Sourced: raised on Colin & Samir as the clarity-over-exaggeration example.",
   url:"https://www.youtube.com/watch?v=uxPdPpi5W4o",go:"Watch"},
- {id:"H07",t:"Sahara greening project, 15M+ views",by:"Andrew Millison",tag:"Superlative",st:"doc",
+ {id:"H07",pf:"YouTube",form:"video",t:"Sahara greening project, 15M+ views",by:"Andrew Millison",tag:"Superlative",st:"doc",
   why:"A permaculture channel broke out by packaging for the general audience instead of the niche. The hook assumes the viewer knows nothing about the subject.",
   app:"Our AI content over-indexes on insider language. Package for the operations director, not the AI engineer.",
   ev:"Sourced: case study in the Colin & Samir episode notes. Linked video is the UN/Senegal breakout - confirm it is the one Galloway cited.",
   url:"https://www.youtube.com/watch?v=WCli0gyNwL0",go:"Watch"},
- {id:"H08",t:"The wow-factor opening (video title unconfirmed)",by:"MrBeast",tag:"Visible Mechanism / Foreshadow",st:"ver",
+ {id:"H08",pf:"YouTube",form:"other",t:"The wow-factor opening (video title unconfirmed)",by:"MrBeast",tag:"Visible Mechanism / Foreshadow",st:"ver",
   why:"An unreasonable object craned into frame in the first minute, adding nothing to the title or thumbnail promise, existing purely to make leaving feel like a loss - the wow factor as a deliberate line item.",
   app:"Budget one unreasonable visual per video. Ours is motion, not cranes: the whole KDCI org chart assembling in under two seconds.",
   ev:"To verify: the wow-factor principle is documented in the memo, but I could not confirm the specific video I originally named. Identify it before citing this row.",
   url:"https://www.alexanderjarvis.com/memo-how-to-succeed-in-mrbeast-production/",go:"The memo"},
- {id:"H09",t:"$1 vs $1,000,000,000 Yacht",by:"MrBeast",tag:"Versus / Matchup",st:"doc",
+ {id:"H09",pf:"YouTube",form:"video",t:"$1 vs $1,000,000,000 Yacht",by:"MrBeast",tag:"Versus / Matchup",st:"doc",
   why:"Tension builds across the whole runtime toward a payoff the title already promised. The format is the retention mechanism, not the edit.",
   app:"Format-first thinking: pick a structure that generates tension before writing a line of script.",
   ev:"Sourced: named in the memo as a format that builds to a satisfying payoff.",
   url:"https://www.youtube.com/watch?v=48h57PspBec",go:"Watch"},
- {id:"H10",t:"Thumbnail retrofit on an old video",by:"Tim Gabe",tag:"Packaging tweak",st:"doc",
+ {id:"H10",pf:"YouTube",form:"other",t:"Thumbnail retrofit on an old video",by:"Tim Gabe",tag:"Packaging tweak",st:"doc",
   why:"A thumbnail improved by roughly 30-40% snowballed into about forty times the daily views. Not a hook as such, but the clearest evidence that packaging changes compound rather than add.",
   app:"Retrofit the first frame on our three best-performing older videos before making anything new.",
   ev:"Sourced: figures given by Galloway on Colin & Samir. That episode is the link - the anecdote never names the specific video.",
   url:"https://www.colinandsamir.com/resources/the-new-rules-of-youtube-from-paddy-galloway",go:"Episode notes"},
- {id:"H11",t:"Drag race format, origin",by:"Carwow",tag:"Versus / Matchup",st:"ver",
+ {id:"H11",pf:"YouTube",form:"channel",t:"Drag race format, origin",by:"Carwow",tag:"Versus / Matchup",st:"ver",
   why:"Logged as the source format Red Bull borrowed in H04. Worth watching the original to see how much hook work the line-up shot does before anyone speaks.",
   app:"Reference for the line-them-up-and-race-them structure applied to workflows.",
   ev:"To verify: pick one video, timestamp the line-up shot, log frame 0.",url:"",go:""},
- {id:"H12",t:"Practical-effect transition reels",by:"Zach King",tag:"Pattern Interrupt",st:"ver",
+ {id:"H12",pf:"Reels / TikTok",form:"channel",t:"Practical-effect transition reels",by:"Zach King",tag:"Pattern Interrupt",st:"ver",
   why:"Logged for the impossible cut placed inside the first two seconds, so the pattern interrupt is the hook rather than a mid-video device. Principle supported by his Youshaei interview; the specific reel still needs choosing.",
   app:"Front-load one impossible transition: an AI-generated shot morphing into the real KDCI workspace.",
   ev:"To verify: choose a reel, confirm the interrupt lands before 2.0s.",url:"",go:""},
- {id:"H13",t:"Huge If True cold opens",by:"Cleo Abram",tag:"Open Loop / Curiosity Gap",st:"ver",
+ {id:"H13",pf:"YouTube / Shorts",form:"channel",t:"Huge If True cold opens",by:"Cleo Abram",tag:"Open Loop / Curiosity Gap",st:"ver",
   why:"Logged for a question posed to camera in under four seconds with the stakes attached, then an immediate cut to the thing being explained. Closest tonal match to KDCI - optimistic, explainer-led, safe for a B2B audience.",
   app:"Study her question construction for our AI-topic openers.",
   ev:"To verify: watch three consecutive uploads, log which of the 14 types each opener uses.",url:"",go:""},
- {id:"H14",hide:1,t:"Our own best and worst performer",by:"KDCI.ai",tag:"Baseline",st:"must",
+ {id:"H14",hide:1,pf:"Internal",form:"other",t:"Our own best and worst performer",by:"KDCI.ai",tag:"Baseline",st:"must",
   why:"The library is worthless without our own baseline. Log our current best and worst performing video with exactly the same rigour as everything above, including frame 0 and the retention curve.",
   app:"The benchmark every new video gets compared against, and the row that turns every provisional number in this standard into a real one.",
   ev:"Must fill - pull from our analytics. Highest priority row in the file.",url:"",go:""}
 ];
 var MOTION=[
- {id:"M01",t:"Atlas and Borders map signature",by:"Vox",tag:"Map reveal system",st:"doc",
+ {id:"M01",pf:"YouTube",form:"channel",t:"Atlas and Borders map signature",by:"Vox",tag:"Map reveal system",st:"doc",
   why:"A decluttered map zooms toward a region, the country fills with an accent colour, then callout lines and labels appear on cue. Built with GEOlayers over a custom Mapbox style with the labels stripped out.",
   app:"Our service-coverage and offshore-team explainers. Strip labels, fill one region in KDCI red, bring callouts in on the narration beat.",
   ev:"Sourced: technique named in a published Vox-style production breakdown.",
   url:"https://easy-peasy.ai/blog/how-to-make-vox-style-videos-with-ai",go:"Technique"},
- {id:"M02",t:"The five-property map camera",by:"Johnny Harris",tag:"Camera move",st:"doc",
+ {id:"M02",pf:"YouTube",form:"channel",t:"The five-property map camera",by:"Johnny Harris",tag:"Camera move",st:"doc",
   why:"He animates latitude, longitude, zoom, bearing and pitch, then offsets the bearing keyframes so the camera comes down and orbits rather than sliding flatly. That offset is what makes the move feel filmed instead of tweened.",
   app:"Adopt the offset-bearing trick in the motion kit. The cheapest single upgrade available to our map and diagram moves.",
   ev:"Sourced: the five properties and the keyframe offset are named in the same breakdown.",
   url:"https://easy-peasy.ai/blog/how-to-make-vox-style-videos-with-ai",go:"Technique"},
- {id:"M03",t:"Construction-paper texture",by:"Vox art direction",tag:"Handmade texture",st:"doc",
+ {id:"M03",pf:"YouTube",form:"channel",t:"Construction-paper texture",by:"Vox art direction",tag:"Handmade texture",st:"doc",
   why:'Art director Joey Sendaydiego builds some visuals from actual construction paper, on the rule that it should not "look perfect" or it reads as an ad rather than editorial. The slightly choppy result is why the style feels handmade where corporate explainers feel synthetically smooth.',
   app:"Answers our problem directly: the glassmorphic overlays read clean but cold. Test paper grain at 8-12% and drop the frame rate on one element.",
   ev:"Sourced: quote and method published in the same breakdown.",
   url:"https://easy-peasy.ai/blog/how-to-make-vox-style-videos-with-ai",go:"Technique"},
- {id:"M04",t:"No desks, no talking-head backbone",by:"Vox / Joe Posner",tag:"Format rule",st:"doc",
+ {id:"M04",pf:"YouTube",form:"channel",t:"No desks, no talking-head backbone",by:"Vox / Joe Posner",tag:"Format rule",st:"doc",
   why:"The founding producer set two rules: nobody behind a desk, because that reads as cable news, and no talking-head interview carrying a video. He called the format an animated opinion essay.",
   app:"Adopt both. It kills the interview-plus-b-roll default we fall back on when the brief is thin.",
   ev:"Sourced: rules attributed to Posner in the published breakdown.",
   url:"https://easy-peasy.ai/blog/how-to-make-vox-style-videos-with-ai",go:"Technique"},
- {id:"M05",t:"Flat vector worlds and a mascot system",by:"Kurzgesagt",tag:"Design system",st:"doc",
+ {id:"M05",pf:"YouTube",form:"channel",t:"Flat vector worlds and a mascot system",by:"Kurzgesagt",tag:"Design system",st:"doc",
   why:"Where Vox leans editorial collage, Kurzgesagt builds flat vector worlds around a recurring character set. The system is what lets a weekly release stay on-brand without redesigning anything.",
   app:"Model for what the KDCI motion kit should become: a reusable world, not a folder of one-off comps.",
   ev:"Sourced: contrast with Vox collage is documented, and the studio publishes its own After Effects workflow course.",
   url:"https://www.skillshare.com/en/classes/motion-graphics-with-kurzgesagt-part-1/631970755",go:"Their AE class"},
- {id:"M06",t:"Zoom-level control and sticky metaphors",by:"Kurzgesagt",tag:"Visual structure",st:"doc",
+ {id:"M06",pf:"YouTube",form:"channel",t:"Zoom-level control and sticky metaphors",by:"Kurzgesagt",tag:"Visual structure",st:"doc",
   why:"It can zoom out without going vague, and you always know where you are in the explanation. The idea sticks because you remember the picture, not the sentence.",
   app:"Storyboard rule: one concept per shot, and every abstract claim gets one picture that could survive on its own.",
   ev:"Sourced: described in a published survey of explainer channels.",
   url:"https://vidpros.com/best-explainer-youtube-channels/",go:"Survey"},
- {id:"M07",t:"One question, one lesson",by:"TED-Ed",tag:"Visual structure",st:"doc",
+ {id:"M07",pf:"YouTube",form:"channel",t:"One question, one lesson",by:"TED-Ed",tag:"Visual structure",st:"doc",
   why:"The cleanest single-question format on the platform. Pacing is deliberate and the visuals follow the logic beat by beat rather than decorating the narration.",
   app:"Use for our glossary and how-it-works pieces, where the temptation is to answer three questions at once.",
   ev:"Sourced: same published survey.",
   url:"https://vidpros.com/best-explainer-youtube-channels/",go:"Survey"},
- {id:"M08",t:"Vox lineage run by one person",by:"Cleo Abram",tag:"Solo production model",st:"doc",
+ {id:"M08",pf:"YouTube / Shorts",form:"channel",t:"Vox lineage run by one person",by:"Cleo Abram",tag:"Solo production model",st:"doc",
   why:"Named as part of the Vox lineage now carried by solo creators. Proof the style is achievable without a full motion team, which matters because we do not have one either.",
   app:"Closest realistic production model for KDCI. Study how much is reused between uploads versus built fresh.",
   ev:"Sourced: named in the documented lineage of the style. Channel-level row - pick a specific upload when verifying.",
   url:"https://easy-peasy.ai/blog/how-to-make-vox-style-videos-with-ai",go:"Technique"},
- {id:"M09",t:"After Effects technique teardowns",by:"Ben Marriott",tag:"Text and shape technique",st:"ver",
+ {id:"M09",pf:"YouTube",form:"channel",t:"After Effects technique teardowns",by:"Ben Marriott",tag:"Text and shape technique",st:"ver",
   why:"Logged for reproducible shape-layer and text-reveal mechanics - the best source for kinetic type that does not look like a preset.",
   app:"Build the KDCI text-animation kit from three or four of these so every editor animates type identically.",
   ev:"To verify: pick the specific tutorials, note which techniques we adopt.",url:"",go:""},
- {id:"M10",t:"Timing and easing fundamentals",by:"School of Motion",tag:"Craft baseline",st:"ver",
+ {id:"M10",pf:"YouTube",form:"channel",t:"Timing and easing fundamentals",by:"School of Motion",tag:"Craft baseline",st:"ver",
   why:"Logged for anticipation, overshoot and secondary motion - why a twelve-frame move with anticipation reads as intentional and a six-frame linear one reads as cheap.",
   app:"Required watching before anyone touches the motion kit. Set the easing table from it.",
   ev:"To verify: confirm our timing numbers against their guidance.",url:"",go:""},
- {id:"M11",t:"Product films",by:"Apple",tag:"Restraint and easing",st:"ver",
+ {id:"M11",pf:"Brand film",form:"channel",t:"Product films",by:"Apple",tag:"Restraint and easing",st:"ver",
   why:"Logged for object-in-void framing, macro reveals and long ease-outs that land with authority instead of bouncing. Restraint reads as expensive.",
   app:"Reference for enterprise-facing pieces where we want credibility over energy.",
   ev:"To verify: pick one film, log the easing character of three specific moves.",url:"",go:""},
- {id:"M12",t:"Release and changelog videos",by:"Linear / Vercel",tag:"UI motion",st:"ver",
+ {id:"M12",pf:"Web / brand",form:"channel",t:"Release and changelog videos",by:"Linear / Vercel",tag:"UI motion",st:"ver",
   why:"Logged for interfaces that animate themselves, typography carrying the message, and real product footage composited with clean vector callouts so nothing has to be faked.",
   app:"Solves our recurring problem: UI distorts when generated. Generate the plate, composite the interface.",
   ev:"To verify: pick one release video from each, log how callouts are timed to the cursor.",url:"",go:""},
- {id:"M13",t:"Config keynote motion package",by:"Figma",tag:"Glassmorphic depth",st:"ver",
+ {id:"M13",pf:"Keynote",form:"channel",t:"Config keynote motion package",by:"Figma",tag:"Glassmorphic depth",st:"ver",
   why:"Logged for layered translucency with real blur falloff and a single consistent light direction - the reason it reads as depth rather than as a filter.",
   app:"Audit our blur radius and light direction against theirs. Inconsistent light direction is what makes our glassmorphism look applied rather than built.",
   ev:"To verify: screenshot three layered moments, measure the falloff.",url:"",go:""},
- {id:"M14",hide:1,t:"Our current motion kit",by:"KDCI.ai",tag:"Baseline",st:"must",
+ {id:"M14",hide:1,pf:"Internal",form:"other",t:"Our current motion kit",by:"KDCI.ai",tag:"Baseline",st:"must",
   why:"Inventory what we actually have today - lower thirds, wordmark animation, transitions - with honest notes on what is inconsistent between projects.",
   app:"Defines the gap between where the kit is and where the standard says it should be. Nothing in Alden's section is real until this exists.",
   ev:"Must fill - Alden, from the shared folder.",url:"",go:""}
@@ -980,6 +1017,7 @@ function kind(u){ return /(?:youtube\.com\/watch|youtu\.be\/|vimeo\.com\/)/i.tes
 
 function esc(s){ return String(s).replace(/&(?![a-z#]+;)/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 var BADGE={doc:["doc","Sourced"],ver:["ver","To verify"],must:["must","Must fill"]};
+var FORM={video:"One video",channel:"Channel level",other:"Not a video"};
 /* search text lives in JS, never in an attribute - entry prose contains quotes
    and dumping it into data-* silently breaks the markup */
 var BLOB={};
@@ -989,11 +1027,13 @@ function card(e){
   var k=e.url?kind(e.url):null;
   var link=e.url?'<a class="go" href="'+encodeURI(e.url)+'" target="_blank" rel="noopener" title="'+
     LABEL[k]+'">'+ICON[k]+esc(e.go)+'</a>':'';
-  return '<article class="entry'+(e.st==="must"?" fill":"")+'" id="'+e.id+'" data-st="'+e.st+'">'+
-    '<div class="top"><span class="id">'+esc(e.id)+'</span><span class="tagt">'+esc(e.tag)+'</span></div>'+
+  return '<article class="entry'+(e.st==="must"?" fill":"")+'" id="'+e.id+'" data-st="'+e.st+'" data-form="'+e.form+'">'+
+    '<div class="top"><span class="id">'+esc(e.id)+'</span><span class="tagt">'+esc(e.tag)+
+      '</span><span class="pf">'+esc(e.pf)+'</span></div>'+
     '<h4>'+esc(e.t)+'</h4><p class="by">'+esc(e.by)+'</p><p class="why">'+esc(e.why)+'</p>'+
     '<p class="app"><b>For KDCI:</b> '+esc(e.app)+'</p>'+
-    '<div class="foot"><span class="badge '+b[0]+'">'+b[1]+'</span>'+link+
+    '<div class="foot"><span class="badge '+b[0]+'">'+b[1]+'</span><span class="form f-'+e.form+'">'+
+      FORM[e.form]+'</span>'+link+
     '<span class="ev">'+esc(e.ev)+'</span></div></article>';
 }
 function live(a){ return a.filter(function(e){ return !e.hide; }); }
@@ -1022,26 +1062,56 @@ function n(s){ return all.filter(function(e){return e.st===s;}).length; }
 document.getElementById("cTot").textContent=all.length;
 document.getElementById("cDoc").textContent=n("doc");
 document.getElementById("cVer").textContent=n("ver")+n("must");
+document.getElementById("cVid").textContent=all.filter(function(e){return e.form==="video";}).length;
+var bc=document.getElementById("btnCount");
+if(bc) bc.textContent="("+all.length+" rows)";
 document.getElementById("cDoct").textContent=DOCTRINE.length;
 
 /* ---- nav ---- */
 var secs=[].slice.call(document.querySelectorAll("section[data-nav]"));
-var ticks=document.getElementById("ticks"), fill=document.getElementById("fill");
-secs.forEach(function(s){
-  var b=document.createElement("button");
-  b.className="tick"; b.type="button";
-  b.setAttribute("aria-label",s.dataset.nav);
-  b.innerHTML='<i></i><b>'+s.dataset.nav+'</b>';
-  b.addEventListener("click",function(){ s.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); });
-  ticks.appendChild(b);
+var track=document.getElementById("track");
+/* The document turns over at the library. Split the rail there and label both
+   runs, so the bar says where you are, not just how far along. */
+var split=0;
+secs.forEach(function(s,i){ if(s.id==="s13") split=i; });
+var RUNS=[{label:"Editing",from:0,to:split},{label:"References",from:split,to:secs.length}];
+var tickEls=[];
+var runLabels=[];
+RUNS.forEach(function(run){
+  var lab=document.createElement("button");
+  lab.type="button"; lab.className="grp-lab"; lab.textContent=run.label;
+  lab.setAttribute("aria-label","Jump to the "+run.label+" section");
+  lab.addEventListener("click",function(){
+    if(run.from===0){ scrollTo({top:0,behavior:reduce?"auto":"smooth"}); }
+    else { secs[run.from].scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); }
+  });
+  track.appendChild(lab);
+  runLabels.push({el:lab,from:run.from,to:run.to});
+  var g=document.createElement("div");
+  g.className="grp";
+  g.style.flex=(run.to-run.from)+" 1 0%";
+  for(var i=run.from;i<run.to;i++){
+    (function(s){
+      var b=document.createElement("button");
+      b.className="tick"; b.type="button";
+      b.setAttribute("aria-label",run.label+": "+s.dataset.nav);
+      b.innerHTML='<i></i><b>'+s.dataset.nav+'</b>';
+      b.addEventListener("click",function(){ s.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); });
+      g.appendChild(b); tickEls.push(b);
+    })(secs[i]);
+  }
+  track.appendChild(g);
 });
-var tickEls=[].slice.call(ticks.children);
 function onScroll(){
-  var h=document.documentElement;
-  fill.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100).toFixed(2)+"%";
   var cur=-1;
   secs.forEach(function(s,i){ if(s.getBoundingClientRect().top<=150) cur=i; });
-  tickEls.forEach(function(t,i){ i===cur?t.setAttribute("aria-current","true"):t.removeAttribute("aria-current"); });
+  tickEls.forEach(function(t,i){
+    if(i===cur) t.setAttribute("aria-current","true"); else t.removeAttribute("aria-current");
+    if(i<cur) t.classList.add("done"); else t.classList.remove("done");
+  });
+  runLabels.forEach(function(r){
+    if(cur>=r.from && cur<r.to) r.el.classList.add("on"); else r.el.classList.remove("on");
+  });
 }
 addEventListener("scroll",onScroll,{passive:true});
 addEventListener("resize",onScroll); onScroll();
@@ -1087,15 +1157,18 @@ sbtn.addEventListener("click",function(){
 var q=document.getElementById("q"), shown=document.getElementById("shown"), empty=document.getElementById("empty");
 var secChips=[].slice.call(document.querySelectorAll(".chip[data-f]"));
 var stChips=[].slice.call(document.querySelectorAll(".chip[data-s]"));
-var sec="all", states={};
+var fmChips=[].slice.call(document.querySelectorAll(".chip[data-m]"));
+var sec="all", states={}, forms={};
 function apply(){
   var term=q.value.trim().toLowerCase();
   var anyState=Object.keys(states).some(function(k){return states[k];});
+  var anyForm=Object.keys(forms).some(function(k){return forms[k];});
   var total=0;
   [["gHook","hook","secHook"],["gMotion","motion","secMotion"]].forEach(function(p){
     var host=document.getElementById(p[0]), secOK=(sec==="all"||sec===p[1]), vis=0;
     [].slice.call(host.children).forEach(function(el){
-      var ok=secOK && (!term||(BLOB[el.id]||"").indexOf(term)>-1) && (!anyState||states[el.dataset.st]);
+      var ok=secOK && (!term||(BLOB[el.id]||"").indexOf(term)>-1) && (!anyState||states[el.dataset.st])
+             && (!anyForm||forms[el.dataset.form]);
       el.style.display=ok?"":"none"; if(ok) vis++;
     });
     document.getElementById(p[2]).style.display=(secOK&&vis)?"":"none";
@@ -1108,6 +1181,8 @@ secChips.forEach(function(c){ c.addEventListener("click",function(){
   sec=c.dataset.f; secChips.forEach(function(o){ o.setAttribute("aria-pressed",String(o===c)); }); apply(); }); });
 stChips.forEach(function(c){ c.addEventListener("click",function(){
   var k=c.dataset.s; states[k]=!states[k]; c.setAttribute("aria-pressed",String(!!states[k])); apply(); }); });
+fmChips.forEach(function(c){ c.addEventListener("click",function(){
+  var k=c.dataset.m; forms[k]=!forms[k]; c.setAttribute("aria-pressed",String(!!forms[k])); apply(); }); });
 q.addEventListener("input",apply);
 apply();
 
