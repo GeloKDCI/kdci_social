@@ -716,7 +716,7 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
     </div>
     <a class="btn ghost" href="#top">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-      Go to the KDCI Standard section
+      Go to the Production section
     </a>
   </div>
 </section>
@@ -1074,7 +1074,7 @@ var track=document.getElementById("track");
    runs, so the bar says where you are, not just how far along. */
 var split=0;
 secs.forEach(function(s,i){ if(s.id==="s13") split=i; });
-var RUNS=[{label:"Editing",from:0,to:split},{label:"References",from:split,to:secs.length}];
+var RUNS=[{label:"Production",from:0,to:split},{label:"References",from:split,to:secs.length}];
 var tickEls=[];
 var runLabels=[];
 RUNS.forEach(function(run){
